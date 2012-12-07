@@ -1,12 +1,13 @@
 <?php
-/*! Release Manager */
+/*! Release Manager; Output can be used on any confluence page */
 
 // global variables for build execution
 class exec {
 	const HTML_FOLDER_PATH = '../src/';
 	const HTML_FILE_NAME = 'page.html';
-	const JS_FOLDER_PATH = self::HTML_FOLDER_PATH;
+	const ASSET_FOLDER_PATH = self::HTML_FOLDER_PATH;
 	const JS_FILE_NAME = 'swx-sig-generator.js';
+	const CSS_FILE_NAME = 'global.css';
 	const OUTPUT_FOLDER_PATH = './';
 	const OUTPUT_FILE_NAME = 'swx-sig-generator.html';
 }
@@ -14,15 +15,17 @@ class exec {
 try {
 	// get files
 	$page = getFileContents(exec::HTML_FOLDER_PATH . exec::HTML_FILE_NAME);
-	$js = getFileContents(exec::JS_FOLDER_PATH . exec::JS_FILE_NAME);
+	$js = getFileContents(exec::ASSET_FOLDER_PATH . exec::JS_FILE_NAME);
+	$css = getFileContents(exec::ASSET_FOLDER_PATH . exec::CSS_FILE_NAME);
 	
-	// replace js tpl tag with actual js file
-	$pageUsingJS = str_replace('${js_output}', '<script type="text/javascript">' . $js . '</script>', $page);
-
+	// replace tpl tags with actual correct file
+	$page = str_replace('${js_output}', '<script type="text/javascript">' . $js . '</script>', $page);
+	$page = str_replace('${css_output}', '<style text="text/css">' . $css . '</style>', $page);
+	
 	// output file
 	$newfilePath = exec::OUTPUT_FOLDER_PATH . exec::OUTPUT_FILE_NAME;
 	$newfile = fopen($newfilePath, 'w');
-	fwrite($newfile, $pageUsingJS);
+	fwrite($newfile, $page);
 	fclose($newfile);
 	
 	// test by outputting the new file
