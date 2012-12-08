@@ -1,11 +1,31 @@
 <!doctype html>
 <html lang="en">
+	<!--
+	Page is automatically generated. To view source,
+	go to https://github.com/siteworxmlo/swx-sig-generator
+	-->
 	<head>
 		<meta charset="utf-8" />
 		<title>Siteworx HTML Signature Builder</title>
 		${css_output}
 	</head>
 	<body>
+		<div class="item">
+			Name: <input type="text" name="name" />
+		</div>
+		<div class="item">
+			Title: <input type="text" name="title" />
+		</div>
+		
+		<div class="contacts-placeholder"></div>
+		
+		<div class="item">
+			<a href="" class="add-contact">Add Contact</a> 
+			<a href="" class="remove-contact">Remove Contact</a>
+		</div>
+		
+		<div class="output"></div>
+		<textarea class="output"></textarea>
 		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 		${js_output}
